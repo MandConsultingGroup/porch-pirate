@@ -1,0 +1,243 @@
+#!/usr/bin/python3
+
+import argparse, json
+from porchpirate import porchpirate
+
+WHITE   = '\033[37m'
+BLUE    = '\033[34m'
+BLACK   = "\u001b[30m"
+RED     = "\u001b[31m"
+YELLOW  = "\u001b[33m"
+MAGENTA = "\u001b[35m"
+CYAN    = "\u001b[36m"
+WHITE   = "\u001b[37m"
+GREEN   = "\u001b[32m"
+BOLD    = '\033[1m'
+END     = '\033[0m'
+
+banner = r'''
+{}                      __          _          __     
+   ___  ___  ________/ /    ___  (_)______ _/ /____ 
+  / _ \/ _ \/ __/ __/ _ \  / _ \/ / __/ _ `/ __/ -_)
+ / .__/\___/_/  \__/_//_/ / .__/_/_/  \_,_/\__/\__/ 
+/_/                      /_/                    
+              by {}Mand Consulting Group{}
+'''.format(BOLD, BLUE, END)
+print(banner)
+
+# set up the argument parser
+parser = argparse.ArgumentParser(
+    description="Secret scanner for public Postman collections.",
+    epilog="Usage: porch-pirate -s shopify --globals",
+)
+parser.add_argument('-s', help="Search term")
+parser.add_argument('-t', help="Entity type.")
+parser.add_argument('-w', help="Workspace ID")
+parser.add_argument('-c', help="Collection ID")
+parser.add_argument('-r', help="Request ID")
+parser.add_argument('-u', help="User ID")
+parser.add_argument('--raw', const='all', nargs='?', help="Show raw JSON output.")
+parser.add_argument('--globals', const='all', nargs='?', help="Show workspace globals.")
+parser.add_argument('--collections', const='all', nargs='?', help="Show workspace collections.")
+parser.add_argument('--requests', const='all', nargs='?', help="Show collection requests.")
+parser.add_argument('--urls', const='all', nargs='?', help="Return list of URLs from a workspace.")
+parser.add_argument('--dump', const='all', nargs='?', help="Dump all requests in a workspace.")
+arguments = parser.parse_args()
+
+# main client flow
+if(arguments.s):
+    porchpirate = porchpirate()
+    if arguments.t:
+        entity_type = arguments.t
+    else:
+        entity_type = None
+    search = json.loads(porchpirate.search(arguments.s, entity_type))
+    search_results_count = len(search['data'])
+    print(f"{BOLD}{GREEN}[+]{END} Query returned {search_results_count} search results.{END}\n")
+    if(arguments.globals):
+        findings = []
+        unique_findings = []
+        for result in search['data']:
+            try:
+                workspace = result['document']['workspaces']
+                for w in workspace:
+                    findings.append({
+                        'id': w['id'],
+                        'name': w['name']
+                    })
+            except:
+                pass
+        # todo: find a better way to sort unique results at an API level
+        seen_findings = set()
+        for obj in findings:
+            if obj['name'] not in seen_findings:
+                unique_findings.append(obj)
+                seen_findings.add(obj['name'])
+        number_of_findings = len(unique_findings)
+        print(f"{BOLD}{GREEN}[+]{END} Found {number_of_findings} unique workspaces. Checking globals...{END}")
+        for finding in unique_findings:
+            print(f"{BOLD}{YELLOW}[*]{END} Querying global variables in {CYAN}{finding['id']}{END}")
+            globalsfindings = {
+                'name': finding['name'],
+                'search_data': search['data'],
+                'finding': json.loads(porchpirate.workspace_globals(finding['id']))
+            }
+            porchpirate._show_formatted_globals_findings(globalsfindings)
+
+    if(arguments.dump):
+        for result in search['data']:
+            try:
+                workspace = result['document']['workspaces']
+                for w in workspace:
+                    print(f"\n{BOLD}{YELLOW}[*]{END} Querying workspace ID {CYAN}{w['id']}{END}")
+                    workspace = json.loads(porchpirate.workspace(w['id']))
+                    collections = json.loads(porchpirate.collections(w['id']))
+                    for collection in collections['data']:
+                        requests = collection['requests']
+                        for r in requests:
+                            request_data = json.loads(porchpirate.request(r['id']))
+                            try:
+                                porchpirate._show_formatted_request(request_data['data'])
+                            except:
+                                pass
+            except:
+                pass
+    if(arguments.urls):
+        for result in search['data']:
+            try:
+                workspace = result['document']['workspaces']
+                for w in workspace:
+                    print(f"\n{BOLD}{YELLOW}[*]{END} Querying workspace ID {CYAN}{w['id']}{END}")
+                    workspace = json.loads(porchpirate.workspace(w['id']))
+                    collections = json.loads(porchpirate.collections(w['id']))
+                    for collection in collections['data']:
+                        requests = collection['requests']
+                        for r in requests:
+                            request_data = json.loads(porchpirate.request(r['id']))
+                            try:
+                                url = request_data['data']['url']
+                                print(f"{BOLD}- URL: {END}{YELLOW}{url}{END}")
+                            except:
+                                pass
+            except:
+                pass
+        exit()
+    if(arguments.raw):
+        print(search)
+    elif(arguments.s and not arguments.globals and not arguments.dump):
+        porchpirate._show_formatted_search_results(search)
+
+if(arguments.w):
+    if(arguments.globals):
+        porchpirate = porchpirate()
+        globals = json.loads(porchpirate.workspace_globals(arguments.w))
+        if(arguments.raw):
+            print(globals)
+        else:
+            porchpirate.show_formatted_globals(globals)
+    if arguments.collections:
+        porchpirate = porchpirate()
+        collections = json.loads(porchpirate.collections(arguments.w))
+        porchpirate._show_formatted_collections(collections)
+    if(arguments.dump):
+        porchpirate = porchpirate()
+        collections = json.loads(porchpirate.collections(arguments.w))
+        try:
+            for collection in collections['data']:
+                requests = collection['requests']
+                for r in requests:
+                    request_data = json.loads(porchpirate.request(r['id']))
+                    try:
+                        porchpirate._show_formatted_request(request_data['data'])
+                    except:
+                        pass
+        except:
+            pass
+    if(arguments.urls):
+        porchpirate = porchpirate()
+        collections = json.loads(porchpirate.collections(arguments.w))
+        try:
+            for collection in collections['data']:
+                requests = collection['requests']
+                for r in requests:
+                    request_data = json.loads(porchpirate.request(r['id']))
+                    try:
+                        url = request_data['data']['url']
+                        print(f"{BOLD}- URL: {END}{YELLOW}{url}{END}")
+                    except:
+                        pass
+        except:
+            pass
+
+    if(arguments.requests):
+        porchpirate = porchpirate()
+        collections = json.loads(porchpirate.collections(arguments.w))
+        try:
+            for collection in collections['data']:
+                requests = collection['requests']
+                # todo: get request from pp.request() function here
+                try:
+                    for request in requests:
+                        print(f"{BOLD}- Request: {END}{YELLOW}{request['name']}{END}")
+                except:
+                    pass
+        except:
+            print(f"{BOLD}{RED}[-]{END} Workspace not found.{END}")
+    else:
+        try:
+            porchpirate = porchpirate()
+            workspace = json.loads(porchpirate.workspace(arguments.w))
+            globals = json.loads(porchpirate.workspace_globals(arguments.w))
+            workspace['globals'] = globals
+            if(arguments.raw):
+                print(workspace, globals)
+            else:
+                try:
+                    porchpirate._show_formatted_workspace(workspace)
+                except:
+                    print(f"{BOLD}{RED}[-]{END} Workspace not found.{END}")
+        except:
+            pass
+
+if(arguments.c):
+    p = porchpirate()
+    collection = json.loads(p.collection(arguments.c))
+    if arguments.raw:
+        print(collection)
+    if arguments.requests:
+        request = json.loads(p.request(arguments.requests))['data']
+        print(request)
+    else:
+        p._show_formatted_collection(collection)
+
+if(arguments.r):
+    p = porchpirate()
+    request = json.loads(p.request(arguments.r))['data']
+    if arguments.raw:
+        print(request)
+    else:
+        p._show_formatted_request(request)
+
+if(arguments.u):
+    p = porchpirate()
+    user_profile = json.loads(p.profile(arguments.u))
+
+    if arguments.raw:
+        print(user_profile)
+    else:
+        if('error' in user_profile):
+            print(f"{BOLD}{RED}[-]{END} User not found.{END}")
+        elif user_profile['entity_type'] == 'team':
+            team_id = user_profile['entity_id']
+            team_members = user_profile['info']['members']
+            team_collections = json.loads(p.team_collections(team_id))
+            team_workspaces = json.loads(p.team_workspaces(team_id))
+            p._show_formatted_team(user_profile, team_collections, team_workspaces, team_members)
+        else:
+            user_id = user_profile['entity_id']
+            user_collections = json.loads(p.user_collections(user_id))
+            user_workspaces = json.loads(p.user_workspaces(user_id))
+            p._show_formatted_user(user_profile, user_collections, user_workspaces)
+
+if not arguments.s and not arguments.w and not arguments.c and not arguments.r and not arguments.u:
+    parser.print_help()
