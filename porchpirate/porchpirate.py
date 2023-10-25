@@ -32,6 +32,10 @@ class porchpirate():
             except:
                 entity_type = 'Unknown'
             try:
+                entity_id = result['document']['id']
+            except:
+                entity_id = 0
+            try:
                 workspace_id = result['document']['workspaces'][0]['id']
             except:
                 workspace_id = 0
@@ -58,6 +62,7 @@ class porchpirate():
 
             print(f"{BOLD}- Title: {END}{YELLOW}{name}{END}")
             print(f"{BOLD}- Entity type: {END}{CYAN}{entity_type}{END}")
+            print(f"{BOLD}- Entity ID: {END}{YELLOW}{entity_id}{END}")
             print(f"{BOLD}- Workspace ID: {END}{YELLOW}{workspace_id}{END}")
             print(f"{BOLD}- User: {END}{YELLOW}{author}{END}")
             if lastupdated != "No data available":

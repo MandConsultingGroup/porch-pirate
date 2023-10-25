@@ -23,7 +23,6 @@ banner = r'''
 /_/                      /_/                    
               by {}Mand Consulting Group{}
 '''.format(BOLD, BLUE, END)
-print(banner)
 
 # set up the argument parser
 parser = argparse.ArgumentParser(
@@ -43,6 +42,9 @@ parser.add_argument('--requests', const='all', nargs='?', help="Show collection 
 parser.add_argument('--urls', const='all', nargs='?', help="Return list of URLs from a workspace.")
 parser.add_argument('--dump', const='all', nargs='?', help="Dump all requests in a workspace.")
 arguments = parser.parse_args()
+
+if not arguments.raw:
+    print(banner)
 
 # main client flow
 if(arguments.s):
@@ -123,7 +125,7 @@ if(arguments.s):
                 pass
         exit()
     if(arguments.raw):
-        print(search)
+        print(json.dumps(search))
     elif(arguments.s and not arguments.globals and not arguments.dump):
         porchpirate._show_formatted_search_results(search)
 
@@ -132,13 +134,16 @@ if(arguments.w):
         porchpirate = porchpirate()
         globals = json.loads(porchpirate.workspace_globals(arguments.w))
         if(arguments.raw):
-            print(globals)
+            print(json.dumps(globals))
         else:
             porchpirate.show_formatted_globals(globals)
     if arguments.collections:
         porchpirate = porchpirate()
         collections = json.loads(porchpirate.collections(arguments.w))
-        porchpirate._show_formatted_collections(collections)
+        if(arguments.raw):
+            print(json.dumps(globals))
+        else:
+            porchpirate._show_formatted_collections(collections)
     if(arguments.dump):
         porchpirate = porchpirate()
         collections = json.loads(porchpirate.collections(arguments.w))
@@ -190,7 +195,7 @@ if(arguments.w):
             globals = json.loads(porchpirate.workspace_globals(arguments.w))
             workspace['globals'] = globals
             if(arguments.raw):
-                print(workspace, globals)
+                print(json.dumps(workspace))
             else:
                 try:
                     porchpirate._show_formatted_workspace(workspace)
@@ -203,8 +208,8 @@ if(arguments.c):
     p = porchpirate()
     collection = json.loads(p.collection(arguments.c))
     if arguments.raw:
-        print(collection)
-    if arguments.requests:
+        print(json.dumps(collection))
+    elif arguments.requests:
         request = json.loads(p.request(arguments.requests))['data']
         print(request)
     else:
@@ -214,7 +219,7 @@ if(arguments.r):
     p = porchpirate()
     request = json.loads(p.request(arguments.r))['data']
     if arguments.raw:
-        print(request)
+        print(json.dumps(request))
     else:
         p._show_formatted_request(request)
 
@@ -223,7 +228,7 @@ if(arguments.u):
     user_profile = json.loads(p.profile(arguments.u))
 
     if arguments.raw:
-        print(user_profile)
+        print(json.dumps(user_profile))
     else:
         if('error' in user_profile):
             print(f"{BOLD}{RED}[-]{END} User not found.{END}")
