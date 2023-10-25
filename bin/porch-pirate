@@ -35,6 +35,7 @@ parser.add_argument('-w', help="Workspace ID")
 parser.add_argument('-c', help="Collection ID")
 parser.add_argument('-r', help="Request ID")
 parser.add_argument('-u', help="User ID")
+parser.add_argument('--proxy', help="Proxy to use.")
 parser.add_argument('--raw', const='all', nargs='?', help="Show raw JSON output.")
 parser.add_argument('--globals', const='all', nargs='?', help="Show workspace globals.")
 parser.add_argument('--collections', const='all', nargs='?', help="Show workspace collections.")
@@ -48,7 +49,11 @@ if not arguments.raw:
 
 # main client flow
 if(arguments.s):
-    porchpirate = porchpirate()
+    if arguments.proxy:
+        proxyconfig = f"http://{arguments.proxy}"
+    else:
+        proxyconfig = None
+    p = porchpirate(proxy=proxyconfig)
     if arguments.t:
         entity_type = arguments.t
     else:
@@ -131,21 +136,33 @@ if(arguments.s):
 
 if(arguments.w):
     if(arguments.globals):
-        porchpirate = porchpirate()
+        if arguments.proxy:
+            proxyconfig = f"http://{arguments.proxy}"
+        else:
+            proxyconfig = None
+        porchpirate = porchpirate(proxy=proxyconfig)
         globals = json.loads(porchpirate.workspace_globals(arguments.w))
         if(arguments.raw):
             print(json.dumps(globals))
         else:
             porchpirate.show_formatted_globals(globals)
     if arguments.collections:
-        porchpirate = porchpirate()
+        if arguments.proxy:
+            proxyconfig = f"http://{arguments.proxy}"
+        else:
+            proxyconfig = None
+        porchpirate = porchpirate(proxy=proxyconfig)
         collections = json.loads(porchpirate.collections(arguments.w))
         if(arguments.raw):
             print(json.dumps(globals))
         else:
             porchpirate._show_formatted_collections(collections)
     if(arguments.dump):
-        porchpirate = porchpirate()
+        if arguments.proxy:
+            proxyconfig = f"http://{arguments.proxy}"
+        else:
+            proxyconfig = None
+        porchpirate = porchpirate(proxy=proxyconfig)
         collections = json.loads(porchpirate.collections(arguments.w))
         try:
             for collection in collections['data']:
@@ -159,7 +176,11 @@ if(arguments.w):
         except:
             pass
     if(arguments.urls):
-        porchpirate = porchpirate()
+        if arguments.proxy:
+            proxyconfig = f"http://{arguments.proxy}"
+        else:
+            proxyconfig = None
+        porchpirate = porchpirate(proxy=proxyconfig)
         collections = json.loads(porchpirate.collections(arguments.w))
         try:
             for collection in collections['data']:
@@ -175,7 +196,11 @@ if(arguments.w):
             pass
 
     if(arguments.requests):
-        porchpirate = porchpirate()
+        if arguments.proxy:
+            proxyconfig = f"http://{arguments.proxy}"
+        else:
+            proxyconfig = None
+        porchpirate = porchpirate(proxy=proxyconfig)
         collections = json.loads(porchpirate.collections(arguments.w))
         try:
             for collection in collections['data']:
@@ -190,7 +215,11 @@ if(arguments.w):
             print(f"{BOLD}{RED}[-]{END} Workspace not found.{END}")
     else:
         try:
-            porchpirate = porchpirate()
+            if arguments.proxy:
+                proxyconfig = f"http://{arguments.proxy}"
+            else:
+                proxyconfig = None
+            porchpirate = porchpirate(proxy=proxyconfig)
             workspace = json.loads(porchpirate.workspace(arguments.w))
             globals = json.loads(porchpirate.workspace_globals(arguments.w))
             workspace['globals'] = globals
@@ -205,7 +234,11 @@ if(arguments.w):
             pass
 
 if(arguments.c):
-    p = porchpirate()
+    if arguments.proxy:
+        proxyconfig = f"http://{arguments.proxy}"
+    else:
+        proxyconfig = None
+    p = porchpirate(proxy=proxyconfig)
     collection = json.loads(p.collection(arguments.c))
     if arguments.raw:
         print(json.dumps(collection))
@@ -216,7 +249,11 @@ if(arguments.c):
         p._show_formatted_collection(collection)
 
 if(arguments.r):
-    p = porchpirate()
+    if arguments.proxy:
+        proxyconfig = f"http://{arguments.proxy}"
+    else:
+        proxyconfig = None
+    p = porchpirate(proxy=proxyconfig)
     request = json.loads(p.request(arguments.r))['data']
     if arguments.raw:
         print(json.dumps(request))
@@ -224,7 +261,11 @@ if(arguments.r):
         p._show_formatted_request(request)
 
 if(arguments.u):
-    p = porchpirate()
+    if arguments.proxy:
+        proxyconfig = f"http://{arguments.proxy}"
+    else:
+        proxyconfig = None
+    p = porchpirate(proxy=proxyconfig)
     user_profile = json.loads(p.profile(arguments.u))
 
     if arguments.raw:
