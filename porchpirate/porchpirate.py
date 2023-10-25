@@ -30,10 +30,13 @@ class porchpirate():
             "flow": "flow.flow",
             "team": "apinetwork.team"
         }
-        self.proxies = {
-            'http': 'http://' + proxy,
-            'https': 'http://' + proxy
-        }
+        if proxy is not None:
+            self.proxies = {
+                'http': 'http://' + proxy,
+                'https': 'http://' + proxy
+            }
+        else:
+            self.proxies = None
 
     def _show_formatted_search_results(self, search_results):
         for result in search_results['data']:

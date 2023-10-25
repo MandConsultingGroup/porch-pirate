@@ -50,7 +50,7 @@ if not arguments.raw:
 # main client flow
 if(arguments.s):
     if arguments.proxy:
-        proxyconfig = f"http://{arguments.proxy}"
+        proxyconfig = arguments.proxy
     else:
         proxyconfig = None
     p = porchpirate(proxy=proxyconfig)
