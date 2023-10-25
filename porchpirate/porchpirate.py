@@ -1,4 +1,8 @@
 import requests
+import warnings
+from urllib3.exceptions import InsecureRequestWarning
+
+
 
 WHITE   = '\033[37m'
 BLUE    = '\033[34m'
@@ -13,6 +17,7 @@ BOLD    = '\033[1m'
 END     = '\033[0m'
 
 class porchpirate():
+    warnings.simplefilter('ignore', InsecureRequestWarning)
 
     def __init__(self, proxy=None):
         self.WS_API_URL = 'https://www.postman.com/_api/ws/proxy'
