@@ -229,19 +229,28 @@ if(arguments.u):
 
     if arguments.raw:
         print(json.dumps(user_profile))
-    else:
-        if('error' in user_profile):
-            print(f"{BOLD}{RED}[-]{END} User not found.{END}")
-        elif user_profile['entity_type'] == 'team':
-            team_id = user_profile['entity_id']
-            team_members = user_profile['info']['members']
-            team_collections = json.loads(p.team_collections(team_id))
-            team_workspaces = json.loads(p.team_workspaces(team_id))
-            p._show_formatted_team(user_profile, team_collections, team_workspaces, team_members)
+
+    if('error' in user_profile):
+        print(f"{BOLD}{RED}[-]{END} User not found.{END}")
+    elif user_profile['entity_type'] == 'team':
+        team_id = user_profile['entity_id']
+        team_members = user_profile['info']['members']
+        team_collections = json.loads(p.team_collections(team_id))
+        team_workspaces = json.loads(p.team_workspaces(team_id))
+        if arguments.raw:
+            print(json.dumps(team_collections))
+            print(json.dumps(team_workspaces))
+            print(json.dumps(team_members))
         else:
-            user_id = user_profile['entity_id']
-            user_collections = json.loads(p.user_collections(user_id))
-            user_workspaces = json.loads(p.user_workspaces(user_id))
+             p._show_formatted_team(user_profile, team_collections, team_workspaces, team_members)
+    else:
+        user_id = user_profile['entity_id']
+        user_collections = json.loads(p.user_collections(user_id))
+        user_workspaces = json.loads(p.user_workspaces(user_id))
+        if arguments.raw:
+            print(json.dumps(user_collections))
+            print(json.dumps(user_workspaces))
+        else:
             p._show_formatted_user(user_profile, user_collections, user_workspaces)
 
 if not arguments.s and not arguments.w and not arguments.c and not arguments.r and not arguments.u:
