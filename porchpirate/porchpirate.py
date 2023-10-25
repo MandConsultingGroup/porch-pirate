@@ -26,7 +26,8 @@ class porchpirate():
             "team": "apinetwork.team"
         }
         self.proxies = {
-            'http': proxy
+            'http': 'http://' + proxy,
+            'https': 'http://' + proxy
         }
 
     def _show_formatted_search_results(self, search_results):
@@ -278,7 +279,7 @@ class porchpirate():
                 "domain": "public"
             }
         }
-        response = requests.post(self.WS_API_URL, headers=search_headers, json=search_data, proxies=self.proxies)
+        response = requests.post(self.WS_API_URL, headers=search_headers, json=search_data, proxies=self.proxies, verify=False)
         return response.text
 
     def search_stats(self, term):
@@ -306,27 +307,27 @@ class porchpirate():
                 "domain":"public"
             }
         }
-        response = requests.post(self.WS_API_URL, headers=stat_headers, json=stat_data, proxies=self.proxies)
+        response = requests.post(self.WS_API_URL, headers=stat_headers, json=stat_data, proxies=self.proxies, verify=False)
         return response.text
     
     def workspace(self, id):
-        response = requests.get(f'https://www.postman.com/_api/workspace/{id}', proxies=self.proxies)
+        response = requests.get(f'https://www.postman.com/_api/workspace/{id}', proxies=self.proxies, verify=False)
         return response.text
     
     def workspace_globals(self, id):
-        response = requests.get(f'https://www.postman.com/_api/workspace/{id}/globals', proxies=self.proxies)
+        response = requests.get(f'https://www.postman.com/_api/workspace/{id}/globals', proxies=self.proxies, verify=False)
         return response.text
     
     def collection(self, id):
-        response = requests.get(f'https://www.postman.com/_api/collection/{id}', proxies=self.proxies)
+        response = requests.get(f'https://www.postman.com/_api/collection/{id}', proxies=self.proxies, verify=False)
         return response.text
     
     def collections(self, id):
-        response = requests.post(f'https://www.postman.com/_api/list/collection?workspace={id}', proxies=self.proxies)
+        response = requests.post(f'https://www.postman.com/_api/list/collection?workspace={id}', proxies=self.proxies, verify=False)
         return response.text
 
     def request(self, id):
-        response = requests.get(f'https://www.postman.com/_api/request/{id}', proxies=self.proxies)
+        response = requests.get(f'https://www.postman.com/_api/request/{id}', proxies=self.proxies, verify=False)
         return response.text
     
     def profile(self, handle):
@@ -338,7 +339,7 @@ class porchpirate():
             "service": "ums",
             "method": "get"
         }
-        response = requests.post(self.WS_API_URL, json=postdata, headers=header, proxies=self.proxies)
+        response = requests.post(self.WS_API_URL, json=postdata, headers=header, proxies=self.proxies, verify=False)
         return response.text
     
     def user_collections(self, userid):
@@ -350,7 +351,7 @@ class porchpirate():
             "method":"get",
             "path":f"/v1/api/profile/user/{userid}?requestedData=collection"
         }
-        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies)
+        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies, verify=False)
         return response.text
 
     def user_workspaces(self, userid):
@@ -362,7 +363,7 @@ class porchpirate():
             "method":"get",
             "path":f"/v1/api/profile/user/{userid}?requestedData=workspace"
         }
-        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies)
+        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies, verify=False)
         return response.text
     
     def team_collections(self, teamid):
@@ -374,7 +375,7 @@ class porchpirate():
             "method":"get",
             "path":f"/v1/api/profile/team/{teamid}?requestedData=collection"
         }
-        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies)
+        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies, verify=False)
         return response.text
 
     def team_workspaces(self, teamid):
@@ -386,5 +387,5 @@ class porchpirate():
             "method":"get",
             "path":f"/v1/api/profile/team/{teamid}?requestedData=workspace"
         }
-        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies)
+        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies, verify=False)
         return response.text

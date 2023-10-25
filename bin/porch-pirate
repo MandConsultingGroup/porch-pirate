@@ -137,7 +137,7 @@ if(arguments.s):
 if(arguments.w):
     if(arguments.globals):
         if arguments.proxy:
-            proxyconfig = f"http://{arguments.proxy}"
+            proxyconfig = arguments.proxy
         else:
             proxyconfig = None
         porchpirate = porchpirate(proxy=proxyconfig)
@@ -148,7 +148,7 @@ if(arguments.w):
             porchpirate.show_formatted_globals(globals)
     if arguments.collections:
         if arguments.proxy:
-            proxyconfig = f"http://{arguments.proxy}"
+            proxyconfig = arguments.proxy
         else:
             proxyconfig = None
         porchpirate = porchpirate(proxy=proxyconfig)
@@ -159,7 +159,7 @@ if(arguments.w):
             porchpirate._show_formatted_collections(collections)
     if(arguments.dump):
         if arguments.proxy:
-            proxyconfig = f"http://{arguments.proxy}"
+            proxyconfig = arguments.proxy
         else:
             proxyconfig = None
         porchpirate = porchpirate(proxy=proxyconfig)
@@ -177,7 +177,7 @@ if(arguments.w):
             pass
     if(arguments.urls):
         if arguments.proxy:
-            proxyconfig = f"http://{arguments.proxy}"
+            proxyconfig = arguments.proxy
         else:
             proxyconfig = None
         porchpirate = porchpirate(proxy=proxyconfig)
@@ -197,7 +197,7 @@ if(arguments.w):
 
     if(arguments.requests):
         if arguments.proxy:
-            proxyconfig = f"http://{arguments.proxy}"
+            proxyconfig = arguments.proxy
         else:
             proxyconfig = None
         porchpirate = porchpirate(proxy=proxyconfig)
@@ -216,7 +216,7 @@ if(arguments.w):
     else:
         try:
             if arguments.proxy:
-                proxyconfig = f"http://{arguments.proxy}"
+                proxyconfig = arguments.proxy
             else:
                 proxyconfig = None
             porchpirate = porchpirate(proxy=proxyconfig)
@@ -235,7 +235,7 @@ if(arguments.w):
 
 if(arguments.c):
     if arguments.proxy:
-        proxyconfig = f"http://{arguments.proxy}"
+        proxyconfig = arguments.proxy
     else:
         proxyconfig = None
     p = porchpirate(proxy=proxyconfig)
@@ -250,7 +250,7 @@ if(arguments.c):
 
 if(arguments.r):
     if arguments.proxy:
-        proxyconfig = f"http://{arguments.proxy}"
+        proxyconfig = arguments.proxy
     else:
         proxyconfig = None
     p = porchpirate(proxy=proxyconfig)
@@ -262,7 +262,7 @@ if(arguments.r):
 
 if(arguments.u):
     if arguments.proxy:
-        proxyconfig = f"http://{arguments.proxy}"
+        proxyconfig = arguments.proxy
     else:
         proxyconfig = None
     p = porchpirate(proxy=proxyconfig)
