@@ -2,8 +2,6 @@ import requests
 import warnings
 from urllib3.exceptions import InsecureRequestWarning
 
-
-
 WHITE   = '\033[37m'
 BLUE    = '\033[34m'
 BLACK   = "\u001b[30m"
@@ -147,7 +145,7 @@ class porchpirate():
             print(f"{BOLD}________________________________________________________________________________{END}\n\n")
 
     def _show_formatted_request(self, request):
-        request_id = request['id']
+        request_id = request['data']['request_id']
         request_name = request['name']
         request_url = request['url']
         request_data = request['data']
