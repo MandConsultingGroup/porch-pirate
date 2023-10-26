@@ -53,7 +53,7 @@ if(arguments.s):
         proxyconfig = arguments.proxy
     else:
         proxyconfig = None
-    p = porchpirate(proxy=proxyconfig)
+    porchpirate = porchpirate(proxy=proxyconfig)
     if arguments.t:
         entity_type = arguments.t
     else:

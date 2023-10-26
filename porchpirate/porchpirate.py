@@ -18,7 +18,6 @@ END     = '\033[0m'
 
 class porchpirate():
     warnings.simplefilter('ignore', InsecureRequestWarning)
-
     def __init__(self, proxy=None):
         self.WS_API_URL = 'https://www.postman.com/_api/ws/proxy'
         self.WORKSPACE_API_URL = 'https://www.postman.com/_api/workspace'
