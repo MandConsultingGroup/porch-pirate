@@ -4,15 +4,6 @@
 
 Porch Pirate started as a tool to quickly uncover Postman secrets, and has slowly begun to evolve into a multi-purpose reconaissance framework for Postman. While other tools attempt to identify very specific keywords as "secrets" (and for the most part, only search for these strings in global variables), we realized we required capabilities that were "secret-agnostic", and had enough flexibility to capture false-positives that still provided offensive value.
 
-### Use Cases
-
-- **Bug Bounty**: Extract secrets and previously undiscovered attack surface from public Postman entities.
-- **Offensive Security**: Use Porch Pirate to yield unique results during engagments with access to leaking proprietary data.
-- **Threat Hunting**: Discover and audit C2 or other malicious API workspaces used by attackers.
-- **Generic OSINT**: Quickly discover leaking API keys for platforms such as Shodan, Shopify, and others.
-- **CI/CD Auditing**: Ensure your organization is taking appropriate measures during development processes and collaboration.
-- **Social Engineering**: Analyze an organization/team's development practices, naming conventions, or other details to craft powerful social engineering campaigns.
-
 ## Installation
 
 ```bash
