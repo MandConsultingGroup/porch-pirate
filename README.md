@@ -119,7 +119,7 @@ porch-pirate -c COLLECTION_ID
 porch-pirate -r REQUEST_ID
 ```
 ```bash
-porch-pirate -u USER_ID
+porch-pirate -u USER_ID/USERNAME
 ```
 
 ## Using as a library

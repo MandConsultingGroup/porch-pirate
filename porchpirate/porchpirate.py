@@ -2,6 +2,10 @@ import requests
 import warnings
 from urllib3.exceptions import InsecureRequestWarning
 
+# cooked up by
+# Dominik Penner (@zer0pwn)
+# &&& Jake Bolam (@xixasec)
+
 WHITE   = '\033[37m'
 BLUE    = '\033[34m'
 BLACK   = "\u001b[30m"

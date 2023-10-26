@@ -3,6 +3,10 @@
 import argparse, json
 from porchpirate import porchpirate
 
+# cooked up by
+# Dominik Penner (@zer0pwn)
+# &&& Jake Bolam (@xixasec)
+
 WHITE   = '\033[37m'
 BLUE    = '\033[34m'
 BLACK   = "\u001b[30m"
@@ -170,7 +174,7 @@ if(arguments.w):
                 for r in requests:
                     request_data = json.loads(porchpirate.request(r['id']))
                     try:
-                        porchpirate._show_formatted_request(request_data['data'])
+                        porchpirate._show_formatted_request(request_data['data'], r['id'])
                     except:
                         pass
         except:
