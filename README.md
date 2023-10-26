@@ -2,17 +2,16 @@
 
 ![](https://i.imgur.com/QL3Daxo.png)
 
-Porch Pirate is a recon client and framework that facilitates the automated discovery and exploitation of API endpoints and secrets committed to public Postman workspaces, collections, requests, users and teams. Porch Pirate can be used as a client or be incorporated into your own applications.
+Porch Pirate started as a tool to quickly uncover Postman secrets, and has slowly begun to evolve into a multi-purpose reconaissance framework for Postman. While other tools attempt to identify very specific keywords as "secrets" (and for the most part, only search for these strings in global variables), we realized we required capabilities that were "secret-agnostic", and had enough flexibility to capture false-positives that still provided offensive value.
 
-Searching for secrets in public Postman workspaces is not new methodology, although we discovered that current writing and tooling around the subject felt incomplete, and did not enable automated recon beyond very specific secret searches. Many of the results that were valuable during our engagements were being overlooked by these tools.
+### Use Cases
 
-Porch Pirate enumerates and presents sensitive results (global secrets, unique headers, endpoints, query paramters, authorization, etc), from publicly accessible Postman entities, such as:
-
-- Workspaces
-- Collections
-- Requests
-- Users
-- Teams
+- **Bug Bounty**: Extract secrets and previously undiscovered attack surface from public Postman entities.
+- **Offensive Security**: Use Porch Pirate to yield unique results during engagments with access to leaking proprietary data.
+- **Threat Hunting**: Discover and audit C2 or other malicious API workspaces used by attackers.
+- **Generic OSINT**: Quickly discover leaking API keys for platforms such as Shodan, Shopify, and others.
+- **CI/CD Auditing**: Ensure your organization is taking appropriate measures during development processes and collaboration.
+- **Social Engineering**: Analyze an organization/team's development practices, naming conventions, or other details to craft powerful social engineering campaigns.
 
 ## Installation
 
