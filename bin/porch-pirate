@@ -103,9 +103,8 @@ if(arguments.s):
                         requests = collection['requests']
                         for r in requests:
                             request_data = json.loads(porchpirate.request(r['id']))
-                            request_data['data']['request_id'] = r['id']
                             try:
-                                porchpirate._show_formatted_request(request_data['data'])
+                                porchpirate._show_formatted_request(request_data['data'], r['id'])
                             except:
                                 pass
             except:
@@ -259,7 +258,7 @@ if(arguments.r):
     if arguments.raw:
         print(json.dumps(request))
     else:
-        p._show_formatted_request(request)
+        p._show_formatted_request(request, arguments.r)
 
 if(arguments.u):
     if arguments.proxy:

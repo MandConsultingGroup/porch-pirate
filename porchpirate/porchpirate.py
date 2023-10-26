@@ -144,8 +144,8 @@ class porchpirate():
                 print(f"{BOLD} {END} - {YELLOW}{request['name']}{END}")
             print(f"{BOLD}________________________________________________________________________________{END}\n\n")
 
-    def _show_formatted_request(self, request):
-        request_id = request['data']['request_id']
+    def _show_formatted_request(self, request, requestid):
+        request_id = requestid
         request_name = request['name']
         request_url = request['url']
         request_data = request['data']
