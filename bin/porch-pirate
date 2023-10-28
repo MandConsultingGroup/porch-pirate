@@ -67,9 +67,26 @@ if(arguments.s):
         entity_type = arguments.t
     else:
         entity_type = None
+
+    search_stats = json.loads(porchpirate.search_stats(arguments.s))
+    # print(search_stats)
+    search_results_count = search_stats['data']['all']
+    api_results = search_stats['data']['api']
+    team_results = search_stats['data']['team']
+    collection_results = search_stats['data']['collection']
+    workspace_results = search_stats['data']['workspace']
+    request_results = search_stats['data']['request']
+    flow_results = search_stats['data']['flow']
+
+    print(f"{BOLD}{GREEN}[+]{END} Query returned {GREEN}{search_results_count}{END} search results.{END}\n")
+    print(f"{BOLD}- Requests:{END}{GREEN}{request_results}{END}")
+    print(f"{BOLD}- Workspaces:{END}{GREEN}{workspace_results}{END}")
+    print(f"{BOLD}- Collections:{END}{GREEN}{request_results}{END}")
+    print(f"{BOLD}- Teams:{END}{GREEN}{team_results}{END}")
+    print(f"{BOLD}- APIs:{END}{GREEN}{api_results}{END}")
+    print(f"{BOLD}- Flows:{END}{GREEN}{flow_results}{END}\n")
+
     search = json.loads(porchpirate.search(arguments.s, indice=entity_type, page=page))
-    search_results_count = len(search['data'])
-    print(f"{BOLD}{GREEN}[+]{END} Query returned {search_results_count} search results.{END}\n")
     if(arguments.globals):
         findings = []
         unique_findings = []
