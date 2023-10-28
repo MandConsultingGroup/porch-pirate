@@ -81,7 +81,7 @@ if(arguments.s):
     print(f"{BOLD}{GREEN}[+]{END} Query returned {GREEN}{search_results_count}{END} search results.{END}\n")
     print(f"{BOLD}- Requests:{END}{GREEN}{request_results}{END}")
     print(f"{BOLD}- Workspaces:{END}{GREEN}{workspace_results}{END}")
-    print(f"{BOLD}- Collections:{END}{GREEN}{request_results}{END}")
+    print(f"{BOLD}- Collections:{END}{GREEN}{collection_results}{END}")
     print(f"{BOLD}- Teams:{END}{GREEN}{team_results}{END}")
     print(f"{BOLD}- APIs:{END}{GREEN}{api_results}{END}")
     print(f"{BOLD}- Flows:{END}{GREEN}{flow_results}{END}\n")
