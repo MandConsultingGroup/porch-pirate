@@ -248,9 +248,11 @@ class porchpirate():
             user_id = entity['friendly']
             print(f" - {YELLOW}{user_name}{END}{END} ({user_id}{END})")
 
-    def search(self, term, page=None, indice=None):
+    def search(self, term, page=None, indice=None, limit=100):
+        if limit is not 100:
+            limit = int(limit)
         if page is not None:
-            page = int(page)*100
+            page = int(page)*limit
         else:
             page = 0
         search_headers = {
@@ -283,7 +285,7 @@ class porchpirate():
             "body": {
                 "queryIndices": queryIndices,
                 "queryText": "{0}".format(term),
-                "size": 100,
+                "size": limit,
                 "from": page,
                 "clientTraceId": "",
                 "requestOrigin": "srp",
@@ -341,6 +343,10 @@ class porchpirate():
 
     def request(self, id):
         response = requests.get(f'https://www.postman.com/_api/request/{id}', proxies=self.proxies, verify=False)
+        return response.text
+    
+    def environment(self, id):
+        response = requests.get(f'https://www.postman.com/_api/environment/{id}', proxies=self.proxies, verify=False)
         return response.text
     
     def profile(self, handle):
