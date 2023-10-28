@@ -34,6 +34,7 @@ parser = argparse.ArgumentParser(
     epilog="Usage: porch-pirate -s shopify --globals",
 )
 parser.add_argument('-s', help="Search term")
+parser.add_argument('-p', help="Page number (increment by 100)")
 parser.add_argument('-t', help="Entity type.")
 parser.add_argument('-w', help="Workspace ID")
 parser.add_argument('-c', help="Collection ID")
@@ -53,6 +54,10 @@ if not arguments.raw:
 
 # main client flow
 if(arguments.s):
+    if arguments.p:
+        page = arguments.p
+    else:
+        page = None
     if arguments.proxy:
         proxyconfig = arguments.proxy
     else:
@@ -62,7 +67,7 @@ if(arguments.s):
         entity_type = arguments.t
     else:
         entity_type = None
-    search = json.loads(porchpirate.search(arguments.s, entity_type))
+    search = json.loads(porchpirate.search(arguments.s, indice=entity_type, page=page))
     search_results_count = len(search['data'])
     print(f"{BOLD}{GREEN}[+]{END} Query returned {search_results_count} search results.{END}\n")
     if(arguments.globals):

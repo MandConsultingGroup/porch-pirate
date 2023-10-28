@@ -248,7 +248,11 @@ class porchpirate():
             user_id = entity['friendly']
             print(f" - {YELLOW}{user_name}{END}{END} ({user_id}{END})")
 
-    def search(self, term, indice=None):
+    def search(self, term, page=None, indice=None):
+        if page is not None:
+            page = int(page)*100
+        else:
+            page = 0
         search_headers = {
             "Content-Type": "application/json",
             "X-App-Version": "10.18.8-230926-0808",
@@ -280,7 +284,7 @@ class porchpirate():
                 "queryIndices": queryIndices,
                 "queryText": "{0}".format(term),
                 "size": 100,
-                "from": 0,
+                "from": page,
                 "clientTraceId": "",
                 "requestOrigin": "srp",
                 "mergeEntities": "true",
