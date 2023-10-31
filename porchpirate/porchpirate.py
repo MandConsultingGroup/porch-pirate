@@ -82,7 +82,7 @@ class porchpirate():
             if name:
                 print(f" {BOLD}Name: {END}{GREEN}{name}{END}")
             if description:
-                print(f" {BOLD}Description: {END}{MAGENTA}{description}{END}")
+                print(f" {BOLD}Description: {END}{WHITE}{description}{END}")
             print()
     
     def _show_formatted_workspace(self, workspace_results):
