@@ -48,36 +48,41 @@ class porchpirate():
             try:
                 entity_id = result['document']['id']
             except:
-                entity_id = 0
+                entity_id = False
             try:
                 workspace_id = result['document']['workspaces'][0]['id']
             except:
-                workspace_id = 0
+                workspace_id = False
             try:
                 name = result['document']['name']
             except:
-                name = "No name available."
+                name = False
             try:
                 author = result['document']['publisherHandle']
             except:
-                author = "No author available."
+                author = False
             try:
                 authorId = result['document']['publisherId']
             except:
-                authorId = "No author available."
+                authorId = False
             try:
                 description = result['document']['description']
             except:
-                description = "No description available."
+                description = False
             try:
                 lastupdated = result['document']['updatedAt']
             except:
                 lastupdated = "No data available"
             #print(f"[{YELLOW}{entity_id}{END}] [{CYAN}{entity_type}{END}]")
             print(f"[{CYAN}{entity_type}{END}] [{YELLOW}{entity_id}{END}]")
-            print(f" {BOLD}Author: {END}{CYAN}{author} [{authorId}]{END}")
-            print(f" {BOLD}Workspace: {END}{YELLOW}{workspace_id}{END}")
-            print(f" {BOLD}Name: {END}{GREEN}{name}{END}\n")
+            if author:
+                print(f" {BOLD}Author: {END}{CYAN}{author} [{authorId}]{END}")
+            if workspace_id:
+                print(f" {BOLD}Workspace: {END}{YELLOW}{workspace_id}{END}")
+            if name:
+                print(f" {BOLD}Name: {END}{GREEN}{name}{END}\n")
+            if description:
+                print(f" {BOLD}Description: {END}{CYAN}{description}\n")
     
     def _show_formatted_workspace(self, workspace_results):
         user = workspace_results['data']['profileInfo']['publicName']
