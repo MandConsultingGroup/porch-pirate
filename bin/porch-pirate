@@ -74,7 +74,6 @@ if(arguments.s):
         entity_type = None
 
     search_stats = json.loads(porchpirate.search_stats(arguments.s))
-    # print(search_stats)
     search_results_count = search_stats['data']['all']
     api_results = search_stats['data']['api']
     team_results = search_stats['data']['team']

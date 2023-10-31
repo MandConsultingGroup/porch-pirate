@@ -73,17 +73,11 @@ class porchpirate():
                 lastupdated = result['document']['updatedAt']
             except:
                 lastupdated = "No data available"
-
-            print(f"{BOLD}- Title: {END}{YELLOW}{name}{END}")
-            print(f"{BOLD}- Entity type: {END}{CYAN}{entity_type}{END}")
-            print(f"{BOLD}- Entity ID: {END}{YELLOW}{entity_id}{END}")
-            print(f"{BOLD}- Workspace ID: {END}{YELLOW}{workspace_id}{END}")
-            print(f"{BOLD}- User: {END}{YELLOW}{author}{END}")
-            if lastupdated != "No data available":
-                print(f"{BOLD}- Last updated: {END}{CYAN}{lastupdated}{END}{END}")
-            if description != "No description available." and description != "":
-                print(f"{BOLD}- Description: {END}{CYAN}{description}{END}{END}")
-            print()
+            #print(f"[{YELLOW}{entity_id}{END}] [{CYAN}{entity_type}{END}]")
+            print(f"[{CYAN}{entity_type}{END}] [{YELLOW}{entity_id}{END}]")
+            print(f" {BOLD}Author: {END}{CYAN}{author} [{authorId}]{END}")
+            print(f" {BOLD}Workspace: {END}{YELLOW}{workspace_id}{END}")
+            print(f" {BOLD}Name: {END}{GREEN}{name}{END}\n")
     
     def _show_formatted_workspace(self, workspace_results):
         user = workspace_results['data']['profileInfo']['publicName']
