@@ -120,12 +120,11 @@ class porchpirate():
         collection_created_at = collection['data']['createdAt']
         collection_updated_at = collection['data']['updatedAt']
         collection_request_count = len(collection['data']['order'])
-        print(f"{BOLD}{YELLOW}[*]{END} Fetching collection ID {YELLOW}{collection_id}{END}")
-        print(f"{BOLD}{YELLOW}[*]{END} Collection {YELLOW}{collection_id}{END} has {GREEN}{collection_request_count}{END} requests.{END}\n")
-        print(f"{BOLD}- Title: {END}{CYAN}{collection_name}{END}")
-        print(f"{BOLD}- Owner ID: {END}{YELLOW}{collection_owner}{END}")
-        print(f"{BOLD}- Created at: {END}{CYAN}{collection_created_at}{END}{END}")
-        print(f"{BOLD}- Last updated: {END}{CYAN}{collection_updated_at}{END}{END}")
+        print(f"\n{BOLD}Collection ID {YELLOW}{collection_id}{END}")
+        print(f"{BOLD} - Title: {END}{CYAN}{collection_name}{END}")
+        print(f"{BOLD} - Owner ID: {END}{YELLOW}{collection_owner}{END}")
+        print(f"{BOLD} - Created at: {END}{CYAN}{collection_created_at}{END}{END}")
+        print(f"{BOLD} - Last updated: {END}{CYAN}{collection_updated_at}{END}{END}")
 
     def _show_formatted_collections(self, workspace_collections):
         for collection in workspace_collections['data']:
@@ -133,15 +132,11 @@ class porchpirate():
             collection_name = collection['name']
             collection_requests = collection['requests']
             collection_request_count = len(collection['requests'])
-            print(f"{BOLD}{YELLOW}[*]{END} Fetching collection ID {CYAN}{collection_id}{END}")
-            print(f"{BOLD}{YELLOW}{GREEN}[+]{END}{END} Collection has {GREEN}{collection_request_count}{END} requests.{END}")
-            print(f"{BOLD}________________________________________________________________________________{END}")
+            print(f"\n{BOLD}Collection ID {YELLOW}{collection_id}{END}")
             print(f"{BOLD}- Name: {END}{CYAN}{collection_name}{END}{END}")
             print(f"{BOLD}- Requests: {END}{END}")
             for request in collection_requests:
                 print(f"{BOLD} {END} - {YELLOW}{request['name']}{END}")
-            print(f"{BOLD}________________________________________________________________________________{END}\n\n")
-
     def _show_formatted_request(self, request, requestid):
         request_id = requestid
         request_name = request['name']
