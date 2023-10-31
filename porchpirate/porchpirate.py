@@ -80,9 +80,10 @@ class porchpirate():
             if workspace_id:
                 print(f" {BOLD}Workspace: {END}{YELLOW}{workspace_id}{END}")
             if name:
-                print(f" {BOLD}Name: {END}{GREEN}{name}{END}\n")
+                print(f" {BOLD}Name: {END}{GREEN}{name}{END}")
             if description:
-                print(f" {BOLD}Description: {END}{CYAN}{description}\n")
+                print(f" {BOLD}Description: {END}{MAGENTA}{description}{END}")
+            print()
     
     def _show_formatted_workspace(self, workspace_results):
         user = workspace_results['data']['profileInfo']['publicName']
@@ -137,7 +138,7 @@ class porchpirate():
             collection_name = collection['name']
             collection_requests = collection['requests']
             collection_request_count = len(collection['requests'])
-            print(f"\n{BOLD}Collection ID {YELLOW}{collection_id}{END}")
+            print(f"\n{BOLD}Collection ID{END} {YELLOW}{collection_id}{END}")
             print(f"{BOLD}- Name: {END}{CYAN}{collection_name}{END}{END}")
             print(f"{BOLD}- Requests: {END}{END}")
             for request in collection_requests:
