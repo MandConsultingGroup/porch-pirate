@@ -356,6 +356,18 @@ class porchpirate():
         response = requests.post(self.WS_API_URL, json=postdata, headers=header, proxies=self.proxies, verify=False)
         return response.text
     
+    def user(self, userid):
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        postdata = {
+            "service":"publishing",
+            "method":"get",
+            "path":f"/v1/api/profile/user/{userid}"
+        }
+        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies, verify=False)
+        return response.text   
+    
     def user_collections(self, userid):
         headers = {
             'Content-Type': 'application/json'
@@ -376,6 +388,18 @@ class porchpirate():
             "service":"publishing",
             "method":"get",
             "path":f"/v1/api/profile/user/{userid}?requestedData=workspace"
+        }
+        response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies, verify=False)
+        return response.text
+
+    def team(self, teamid):
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        postdata = {
+            "service":"publishing",
+            "method":"get",
+            "path":f"/v1/api/profile/team/{teamid}"
         }
         response = requests.post(self.WS_API_URL, json=postdata, headers=headers, proxies=self.proxies, verify=False)
         return response.text

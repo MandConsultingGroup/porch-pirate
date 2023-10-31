@@ -102,7 +102,7 @@ if(arguments.s):
                     })
             except:
                 pass
-            
+
         seen_findings = set()
         for obj in findings:
             if obj['name'] not in seen_findings:
@@ -124,7 +124,7 @@ if(arguments.s):
             try:
                 workspace = result['document']['workspaces']
                 for w in workspace:
-                    print(f"\n{BOLD}{YELLOW}[*]{END} Querying workspace ID {CYAN}{w['id']}{END}")
+                    print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w['id']}{END}")
                     workspace = json.loads(porchpirate.workspace(w['id']))
                     collections = json.loads(porchpirate.collections(w['id']))
                     for collection in collections['data']:
@@ -293,6 +293,11 @@ if(arguments.u):
     else:
         proxyconfig = None
     p = porchpirate(proxy=proxyconfig)
+
+    if arguments.u.isnumeric():
+        # User ID logic
+        pass
+
     user_profile = json.loads(p.profile(arguments.u))
 
     if arguments.raw:
