@@ -104,7 +104,6 @@ class porchpirate():
             for e in environment['data']['values']:
                 print(f"{BOLD} - {END}{YELLOW}{e['key']}{END}={GREEN}{e['value']}{END}")
             print()
-        print("\n")
         print(f"{BOLD}- Collections ({collection_count}): {END}")
         for collection in workspace_results['data']['dependencies']['collections']:
             collectionurl = f"https://www.postman.com/{user}/workspace/{slug}/collection/{collection}"
