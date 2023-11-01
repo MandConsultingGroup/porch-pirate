@@ -169,10 +169,7 @@ if(arguments.w):
         else:
             proxyconfig = None
         porchpirate = porchpirate(proxy=proxyconfig)
-        workspace = json.loads(porchpirate.workspace(arguments.w))
         globals = json.loads(porchpirate.workspace_globals(arguments.w))
-        environments = workspace['data']['dependencies']['environments']
-        print(environments)
         if(arguments.raw):
             print(json.dumps(globals))
         else:
@@ -252,15 +249,9 @@ if(arguments.w):
             porchpirate = porchpirate(proxy=proxyconfig)
             workspace = json.loads(porchpirate.workspace(arguments.w))
             globals = json.loads(porchpirate.workspace_globals(arguments.w))
-            workspace['globals'] = []
-            workspace['globals'].append(globals)
-            environments = workspace['data']['dependencies']['environments']
-            for environment in environments:
-                environment_globals = json.loads(porchpirate.environment(environment))
-                workspace['globals'].append(environment_globals)
+            workspace['globals'] = globals
             if(arguments.raw):
                 print(json.dumps(workspace))
-                print(json.dumps(workspace['globals']))
             else:
                 try:
                     porchpirate._show_formatted_workspace(workspace)
