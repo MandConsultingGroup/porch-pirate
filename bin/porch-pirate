@@ -171,12 +171,19 @@ if(arguments.w):
         porchpirate = porchpirate(proxy=proxyconfig)
         workspace = json.loads(porchpirate.workspace(arguments.w))
         globals = json.loads(porchpirate.workspace_globals(arguments.w))
-        environments = workspace['data']['dependencies']['environments']
-        print(environments)
+        workspace['globals'] = []
+        workspace['globals'].append(globals)
+        try:
+            environments = workspace['data']['dependencies']['environments']
+            for environment in environments:
+                environment_globals = json.loads(porchpirate.environment(environment))
+                workspace['globals'].append(environment_globals)
+        except:
+            pass
         if(arguments.raw):
             print(json.dumps(globals))
         else:
-            porchpirate.show_formatted_globals(globals)
+            porchpirate._show_formatted_workspace(workspace)
     if arguments.collections:
         if arguments.proxy:
             proxyconfig = arguments.proxy
@@ -254,10 +261,13 @@ if(arguments.w):
             globals = json.loads(porchpirate.workspace_globals(arguments.w))
             workspace['globals'] = []
             workspace['globals'].append(globals)
-            environments = workspace['data']['dependencies']['environments']
-            for environment in environments:
-                environment_globals = json.loads(porchpirate.environment(environment))
-                workspace['globals'].append(environment_globals)
+            try:
+                environments = workspace['data']['dependencies']['environments']
+                for environment in environments:
+                    environment_globals = json.loads(porchpirate.environment(environment))
+                    workspace['globals'].append(environment_globals)
+            except:
+                pass
             if(arguments.raw):
                 print(json.dumps(workspace))
                 print(json.dumps(workspace['globals']))
