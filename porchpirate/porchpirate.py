@@ -96,8 +96,14 @@ class porchpirate():
         print(f"{BOLD}- Name: {END}{CYAN}{name}{END}")
         print(f"{BOLD}- User: {END}{CYAN}{user}{END}")
         print(f"{BOLD}- User ID: {END}{YELLOW}{userid}{END}\n")
-        for g in globals['data']['values']:
-            print(f"{BOLD}- Global: {END}{YELLOW}{g['key']}{END}={GREEN}{g['value']}{END}")
+        for environment in globals:
+            try:
+                print(f"{BOLD}- Environment: {END}{YELLOW}{environment['data']['name']}{END}")
+            except:
+                print(f"{BOLD}- Environment: {END}{YELLOW}Globals{END}")
+            for e in environment['data']['values']:
+                print(f"{BOLD} - {END}{YELLOW}{e['key']}{END}={GREEN}{e['value']}{END}")
+            print()
         print("\n")
         print(f"{BOLD}- Collections ({collection_count}): {END}")
         for collection in workspace_results['data']['dependencies']['collections']:
