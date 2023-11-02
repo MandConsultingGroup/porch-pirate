@@ -233,7 +233,14 @@ if(arguments.w):
                         pass
         except:
             pass
-
+    if(arguments.raw):
+        if arguments.proxy:
+            proxyconfig = arguments.proxy
+        else:
+            proxyconfig = None
+        porchpirate = porchpirate(proxy=proxyconfig)
+        workspace = json.loads(porchpirate.workspace(arguments.w))
+        print(json.dumps(workspace))
     if(arguments.requests):
         if arguments.proxy:
             proxyconfig = arguments.proxy
@@ -304,6 +311,7 @@ if(arguments.r):
     request = json.loads(p.request(arguments.r))['data']
     if arguments.raw:
         print(json.dumps(request))
+        exit()
     if arguments.curl:
         curl = p.build_curl_request(request)
         print(curl)
