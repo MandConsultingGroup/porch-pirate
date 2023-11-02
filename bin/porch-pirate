@@ -45,6 +45,7 @@ parser.add_argument('--raw', const='all', nargs='?', help="Show raw JSON output.
 parser.add_argument('--globals', const='all', nargs='?', help="Show workspace globals.")
 parser.add_argument('--collections', const='all', nargs='?', help="Show workspace collections.")
 parser.add_argument('--requests', const='all', nargs='?', help="Show collection requests.")
+parser.add_argument('--curl', const='all', nargs='?', help="Show curl command for request.")
 parser.add_argument('--urls', const='all', nargs='?', help="Return list of URLs from a workspace.")
 parser.add_argument('--dump', const='all', nargs='?', help="Dump all requests in a workspace.")
 arguments = parser.parse_args()
@@ -303,6 +304,9 @@ if(arguments.r):
     request = json.loads(p.request(arguments.r))['data']
     if arguments.raw:
         print(json.dumps(request))
+    if arguments.curl:
+        curl = p.build_curl_request(request)
+        print(curl)
     else:
         p._show_formatted_request(request, arguments.r)
 

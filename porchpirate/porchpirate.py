@@ -325,6 +325,17 @@ class porchpirate():
         response = requests.post(self.WS_API_URL, headers=stat_headers, json=stat_data, proxies=self.proxies, verify=False)
         return response.text
     
+    def build_curl_request(self, request):
+        curl_request = f"curl -X {request['method']} '{YELLOW}{request['url']}{END}' \\\n"
+        for header in request['headerData']:
+            curl_request += f"-H '{YELLOW}{header['key']}{END}: {GREEN}{header['value']}{END}' \\\n"
+        if request['dataMode'] == 'params':
+            for parameter in request['data']:
+                curl_request += f"-d '{YELLOW}{parameter['key']}{END}={GREEN}{parameter['value']}{END}'"
+        elif request['dataMode'] == 'raw':
+            curl_request += f"--data-raw '{GREEN}{request['rawModeData']}{END}'"
+        return curl_request
+
     def workspace(self, id):
         response = requests.get(f'https://www.postman.com/_api/workspace/{id}', proxies=self.proxies, verify=False)
         return response.text
