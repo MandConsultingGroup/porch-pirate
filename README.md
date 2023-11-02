@@ -1,6 +1,6 @@
 # Porch Pirate
 
-![](https://i.imgur.com/QL3Daxo.png)
+![](https://i.imgur.com/CWW5b0D.png)
 
 Porch Pirate started as a tool to quickly uncover Postman secrets, and has slowly begun to evolve into a multi-purpose reconaissance framework for Postman. While other tools attempt to identify very specific keywords as "secrets" (and for the most part, only search for these strings in global variables), we realized we required capabilities that were "secret-agnostic", and had enough flexibility to capture false-positives that still provided offensive value.
 
