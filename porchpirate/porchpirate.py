@@ -329,6 +329,11 @@ class porchpirate():
         curl_request = f"curl -X {request['method']} '{YELLOW}{request['url']}{END}' \\\n"
         for header in request['headerData']:
             curl_request += f"-H '{YELLOW}{header['key']}{END}: {GREEN}{header['value']}{END}' \\\n"
+        if request['auth']['type'] == 'basic':
+            curl_request += f"-u '{GREEN}{request['auth']['basic'][1]['value']}{END}:{GREEN}{request['auth']['basic'][0]['value']}{END}' \\\n"
+        elif request['auth']['type'] == 'oauth2':
+            for element in request['auth']['oauth2']:
+                curl_request += f"-u '{YELLOW}{element['key']}{END}:{GREEN}{element['value']}{END}' \\\n"
         if request['dataMode'] == 'params':
             for parameter in request['data']:
                 curl_request += f"-d '{YELLOW}{parameter['key']}{END}={GREEN}{parameter['value']}{END}' "
