@@ -331,7 +331,7 @@ class porchpirate():
             curl_request += f"-H '{YELLOW}{header['key']}{END}: {GREEN}{header['value']}{END}' \\\n"
         if request['dataMode'] == 'params':
             for parameter in request['data']:
-                curl_request += f"-d '{YELLOW}{parameter['key']}{END}={GREEN}{parameter['value']}{END}'"
+                curl_request += f"-d '{YELLOW}{parameter['key']}{END}={GREEN}{parameter['value']}{END}' "
         elif request['dataMode'] == 'raw':
             curl_request += f"--data-raw '{GREEN}{request['rawModeData']}{END}'"
         return curl_request
