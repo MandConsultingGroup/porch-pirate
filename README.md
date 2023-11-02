@@ -157,7 +157,7 @@ print(p.workspace_globals('4127fdda-08be-4f34-af0e-a8bdc06efaba'))
 
 ## Other Examples
 
-Other library usage examples can be located in the `src/examples` directory, which contains the following examples:
+Other library usage examples can be located in the `examples` directory, which contains the following examples:
 
 - `dump_workspace.py`
 - `format_search_results.py`
