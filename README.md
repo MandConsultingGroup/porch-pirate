@@ -165,9 +165,14 @@ Other library usage examples can be located in the `src/examples` directory, whi
 - `format_workspace_globals.py`
 - `get_collection.py`
 - `get_collections.py`
+- `get_profile.py`
 - `get_request.py`
+- `get_statistics.py`
+- `get_team.py`
 - `get_user.py`
 - `get_workspace.py`
 - `recursive_globals_from_search.py`
+- `request_to_curl.py`
 - `search.py`
+- `search_by_page.py`
 - `workspace_collections.py`
