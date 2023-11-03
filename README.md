@@ -32,6 +32,7 @@ Porch Pirate supports the following arguments to be performed on collections, wo
 - `--urls`
 - `--dump`
 - `--raw`
+- `--curl`
 
 #### Simple Search
 
@@ -41,7 +42,7 @@ porch-pirate -s "coca-cola.com"
 
 #### Get Workspace Globals
 
-By default, Porch Pirate will display globals if they are defined in the workspace. Provide a `-w` argument with the workspace ID (found by performing a simple search, or automatic search dump) to extract the workspace's globals, along with other information.
+By default, Porch Pirate will display globals from all active and inactive environments if they are defined in the workspace. Provide a `-w` argument with the workspace ID (found by performing a simple search, or automatic search dump) to extract the workspace's globals, along with other information.
 
 ```bash
 porch-pirate -w abd6bded-ac31-4dd5-87d6-aa4a399071b8
@@ -117,7 +118,21 @@ porch-pirate -c COLLECTION_ID
 porch-pirate -r REQUEST_ID
 ```
 ```bash
-porch-pirate -u USER_ID/USERNAME
+porch-pirate -u USERNAME/TEAMNAME
+```
+
+### Convert Request to Curl
+
+Porch Pirate can build curl requests when provided with a request ID for easier testing.
+
+```bash
+porch-pirate -r 11055256-b1529390-18d2-4dce-812f-ee4d33bffd38 --curl
+```
+
+### Use a proxy
+
+```bash
+porch-pirate -s coca-cola.com --proxy 127.0.0.1:8080
 ```
 
 ## Using as a library
