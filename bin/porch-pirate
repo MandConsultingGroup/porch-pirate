@@ -82,12 +82,19 @@ if(arguments.s):
     flow_results = search_stats['data']['flow']
 
     print(f"{BOLD}{GREEN}[+]{END} Query returned {GREEN}{search_results_count}{END} search results.{END}\n")
-    print(f"{BOLD}- Requests:{END}{GREEN}{request_results}{END}")
-    print(f"{BOLD}- Workspaces:{END}{GREEN}{workspace_results}{END}")
-    print(f"{BOLD}- Collections:{END}{GREEN}{collection_results}{END}")
-    print(f"{BOLD}- Teams:{END}{GREEN}{team_results}{END}")
-    print(f"{BOLD}- APIs:{END}{GREEN}{api_results}{END}")
-    print(f"{BOLD}- Flows:{END}{GREEN}{flow_results}{END}\n")
+    if request_results != 0:
+        print(f"{BOLD}- Requests:{END}{GREEN}{request_results}{END}")
+    if workspace_results != 0:
+        print(f"{BOLD}- Workspaces:{END}{GREEN}{workspace_results}{END}")
+    if collection_results != 0:
+        print(f"{BOLD}- Collections:{END}{GREEN}{collection_results}{END}")
+    if team_results != 0:
+        print(f"{BOLD}- Teams:{END}{GREEN}{team_results}{END}")
+    if api_results != 0:
+        print(f"{BOLD}- APIs:{END}{GREEN}{api_results}{END}")
+    if flow_results != 0:
+        print(f"{BOLD}- Flows:{END}{GREEN}{flow_results}{END}")
+    print()
 
     search = json.loads(porchpirate.search(arguments.s, indice=entity_type, page=page, limit=limit))
     if(arguments.globals):
