@@ -121,7 +121,7 @@ porch-pirate -r REQUEST_ID
 porch-pirate -u USERNAME/TEAMNAME
 ```
 
-### Convert Request to Curl
+#### Convert Request to Curl
 
 Porch Pirate can build curl requests when provided with a request ID for easier testing.
 
@@ -129,7 +129,7 @@ Porch Pirate can build curl requests when provided with a request ID for easier 
 porch-pirate -r 11055256-b1529390-18d2-4dce-812f-ee4d33bffd38 --curl
 ```
 
-### Use a proxy
+#### Use a proxy
 
 ```bash
 porch-pirate -s coca-cola.com --proxy 127.0.0.1:8080
