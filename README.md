@@ -20,7 +20,7 @@ python3 -m pip install porch-pirate
 
 ## Using the client
 
-![](https://i.imgur.com/2nvrlbt.png)
+![](https://i.imgur.com/t2PJ2jF.png)
 
 The Porch Pirate client can be used to nearly fully conduct reviews on public Postman entities in a quick and simple fashion. There are intended workflows and particular keywords to be used that can typically maximize results. These methodologies can be located on our blog: **Plundering Postman with Porch Pirate**.
 
