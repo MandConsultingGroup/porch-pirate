@@ -2,7 +2,9 @@
 
 ![](https://i.imgur.com/CWW5b0D.png)
 
-Porch Pirate started as a tool to quickly uncover Postman secrets, and has slowly begun to evolve into a multi-purpose reconaissance / OSINT framework for Postman. While other tools attempt to identify very specific keywords as "secrets" (and for the most part, only search for these strings in global variables), we realized we required capabilities that were "secret-agnostic", and had enough flexibility to capture false-positives that still provided offensive value.
+Porch Pirate started as a tool to quickly uncover Postman secrets, and has slowly begun to evolve into a multi-purpose reconaissance / OSINT framework for Postman. While existing tools are great proof of concepts, they only attempt to identify very specific keywords as "secrets", and in very limited locations, with no consideration to recon beyond secrets. We realized we required capabilities that were "secret-agnostic", and had enough flexibility to capture false-positives that still provided offensive value.
+
+
 
 Porch Pirate enumerates and presents sensitive results (global secrets, unique headers, endpoints, query parameters, authorization, etc), from publicly accessible Postman entities, such as:
 
