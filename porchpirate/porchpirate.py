@@ -73,7 +73,6 @@ class porchpirate():
                 lastupdated = result['document']['updatedAt']
             except:
                 lastupdated = "No data available"
-            #print(f"[{YELLOW}{entity_id}{END}] [{CYAN}{entity_type}{END}]")
             print(f"[{CYAN}{entity_type}{END}] [{YELLOW}{entity_id}{END}]")
             if author:
                 print(f" {BOLD}Author: {END}{CYAN}{author} [{authorId}]{END}")
@@ -148,6 +147,7 @@ class porchpirate():
             print(f"{BOLD}- Requests: {END}{END}")
             for request in collection_requests:
                 print(f"{BOLD} {END} - {YELLOW}{request['name']}{END}")
+
     def _show_formatted_request(self, request, requestid):
         request_id = requestid
         request_name = request['name']
@@ -198,24 +198,17 @@ class porchpirate():
         print(f"{BOLD}- Username: {END}{CYAN}{profile['info']['slug']}{END}")
         print(f"{BOLD}- Friendly: {END}{CYAN}{profile['info']['friendly']}{END}")
         print(f"{BOLD}- User ID: {END}{YELLOW}{profile['entity_id']}{END}\n")
-
         print(f"{BOLD}Collections:{END}")
-
         for entity in collections['data']['collections']:
             entity_id = entity['entityId']
             entity_name = entity['name']
             print(f" - {YELLOW}{entity_id}{END}{END} ({entity_name}{END})")
-
-        
         print(f"\n{BOLD}Workspaces:{END}")
-
         for entity in workspaces['data']['workspaces']:
             entity_id = entity['entityId']
             entity_name = entity['name']
             print(f" - {YELLOW}{entity_id}{END}{END} ({entity_name}{END})")
-
         print(f"\n{BOLD}Teams:{END}")
-
         for entity in profile['info']['teams']:
             entity_id = entity['id']
             entity_name = entity['friendly']
@@ -225,24 +218,17 @@ class porchpirate():
         print(f"{BOLD}- Team Name: {END}{CYAN}{profile['info']['slug']}{END}")
         print(f"{BOLD}- Friendly: {END}{CYAN}{profile['info']['friendly']}{END}")
         print(f"{BOLD}- Team ID: {END}{YELLOW}{profile['entity_id']}{END}\n")
-
         print(f"{BOLD}Collections:{END}")
-
         for entity in collections['data']['collections']:
             entity_id = entity['entityId']
             entity_name = entity['name']
             print(f" - {YELLOW}{entity_id}{END}{END} ({entity_name}{END})")
-
-        
         print(f"\n{BOLD}Workspaces:{END}")
-
         for entity in workspaces['data']['workspaces']:
             entity_id = entity['entityId']
             entity_name = entity['name']
             print(f" - {YELLOW}{entity_id}{END}{END} ({entity_name}{END})")
-
         print(f"\n{BOLD}Members:{END}")
-
         for entity in members:
             user_name = entity['user_id']
             user_id = entity['friendly']

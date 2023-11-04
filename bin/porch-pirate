@@ -128,45 +128,65 @@ if(arguments.s):
             porchpirate._show_formatted_globals_findings(globalsfindings)
 
     if(arguments.dump):
+        workspaces = []
         for result in search['data']:
             try:
                 workspace = result['document']['workspaces']
                 for w in workspace:
-                    print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w['id']}{END}")
-                    workspace = json.loads(porchpirate.workspace(w['id']))
-                    collections = json.loads(porchpirate.collections(w['id']))
-                    for collection in collections['data']:
-                        requests = collection['requests']
-                        for r in requests:
-                            request_data = json.loads(porchpirate.request(r['id']))
-                            try:
-                                porchpirate._show_formatted_request(request_data['data'], r['id'])
-                            except:
-                                pass
+                    if w['id'] not in workspaces:
+                        workspaces.append(w['id'])
             except:
                 pass
+        for w in workspaces:
+            try:
+                print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}")
+                workspace = json.loads(porchpirate.workspace(w))
+                collections = json.loads(porchpirate.collections(w))
+                for collection in collections['data']:
+                    requests = collection['requests']
+                    for r in requests:
+                        request_data = json.loads(porchpirate.request(r['id']))
+                        try:
+                            porchpirate._show_formatted_request(request_data['data'], r['id'])
+                        except:
+                            pass
+            # skip to next workspace on ctrl-c
+            except KeyboardInterrupt:     
+                continue
+
+    # this might be the ugliest snippet in the whole script
+    # im so sorry
     if(arguments.urls):
+        workspaces = []
         for result in search['data']:
             try:
                 workspace = result['document']['workspaces']
                 for w in workspace:
-                    print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w['id']}{END}")
-                    workspace = json.loads(porchpirate.workspace(w['id']))
-                    collections = json.loads(porchpirate.collections(w['id']))
-                    for collection in collections['data']:
-                        requests = collection['requests']
-                        for r in requests:
-                            request_data = json.loads(porchpirate.request(r['id']))
-                            try:
-                                url = request_data['data']['url']
-                                print(f"{BOLD}- URL: {END}{YELLOW}{url}{END}")
-                            except:
-                                pass
+                    if w['id'] not in workspaces:
+                        workspaces.append(w['id'])
             except:
                 pass
-        exit()
+        for w in workspaces:
+            try:
+                print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}")
+                workspace = json.loads(porchpirate.workspace(w))
+                collections = json.loads(porchpirate.collections(w))
+                for collection in collections['data']:
+                    requests = collection['requests']
+                    try:
+                        for r in requests:
+                            request_data = json.loads(porchpirate.request(r['id']))
+                            url = request_data['data']['url']
+                            print(f"{BOLD}- URL: {END}{YELLOW}{url}{END}")
+                    except:
+                        pass
+            except KeyboardInterrupt:     
+                continue
+            exit()
+
     if(arguments.raw):
         print(json.dumps(search))
+        
     elif(arguments.s and not arguments.globals and not arguments.dump):
         porchpirate._show_formatted_search_results(search)
 
