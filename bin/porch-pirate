@@ -139,7 +139,7 @@ if(arguments.s):
                 pass
         for w in workspaces:
             try:
-                print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}")
+                print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}\n")
                 workspace = json.loads(porchpirate.workspace(w))
                 collections = json.loads(porchpirate.collections(w))
                 for collection in collections['data']:
@@ -168,7 +168,7 @@ if(arguments.s):
                 pass
         for w in workspaces:
             try:
-                print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}")
+                print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}\n")
                 workspace = json.loads(porchpirate.workspace(w))
                 collections = json.loads(porchpirate.collections(w))
                 for collection in collections['data']:
@@ -182,11 +182,11 @@ if(arguments.s):
                         pass
             except KeyboardInterrupt:     
                 continue
-            exit()
+        exit()
 
     if(arguments.raw):
         print(json.dumps(search))
-        
+
     elif(arguments.s and not arguments.globals and not arguments.dump):
         porchpirate._show_formatted_search_results(search)
 
