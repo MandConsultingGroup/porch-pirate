@@ -26,7 +26,8 @@ banner = r'''
  / .__/\___/_/  \__/_//_/ / .__/_/_/  \_,_/\__/\__/ 
 /_/                      /_/                    
               by {}Mand Consulting Group{}
-'''.format(BOLD, BLUE, END)
+                 {}@zer0pwn @xixasec{}
+'''.format(BOLD, BLUE, END, CYAN, END)
 
 parser = argparse.ArgumentParser(
     description="Secret scanner for public Postman collections.",
