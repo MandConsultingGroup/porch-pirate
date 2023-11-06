@@ -24,7 +24,7 @@ python3 -m pip install porch-pirate
 
 ![](https://i.imgur.com/t2PJ2jF.png)
 
-The Porch Pirate client can be used to nearly fully conduct reviews on public Postman entities in a quick and simple fashion. There are intended workflows and particular keywords to be used that can typically maximize results. These methodologies can be located on our blog: [**Plundering Postman with Porch Pirate**[(https://mandconsulting.ca/plundering-postman-with-porch-pirate-osint/).
+The Porch Pirate client can be used to nearly fully conduct reviews on public Postman entities in a quick and simple fashion. There are intended workflows and particular keywords to be used that can typically maximize results. These methodologies can be located on our blog: [**Plundering Postman with Porch Pirate**](https://mandconsulting.ca/plundering-postman-with-porch-pirate-osint/).
 
 Porch Pirate supports the following arguments to be performed on collections, workspaces, or users.
 
