@@ -235,7 +235,7 @@ class porchpirate():
             print(f" - {YELLOW}{user_name}{END}{END} ({user_id}{END})")
 
     def search(self, term, page=None, indice=None, limit=100):
-        if limit is not 100:
+        if limit != 100:
             limit = int(limit)
         if page is not None:
             page = int(page)*limit
