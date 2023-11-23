@@ -143,7 +143,7 @@ if(arguments.s):
                 print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}\n")
                 workspace = json.loads(porchpirate.workspace(w))
                 collections = json.loads(porchpirate.collections(w))
-                for collection in collections['data']:
+                for collection in collections.get('data', []):
                     requests = collection['requests']
                     for r in requests:
                         request_data = json.loads(porchpirate.request(r['id']))
@@ -172,7 +172,7 @@ if(arguments.s):
                 print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}\n")
                 workspace = json.loads(porchpirate.workspace(w))
                 collections = json.loads(porchpirate.collections(w))
-                for collection in collections['data']:
+                for collection in collections.get('data', []):
                     requests = collection['requests']
                     try:
                         for r in requests:
@@ -232,7 +232,7 @@ if(arguments.w):
         porchpirate = porchpirate(proxy=proxyconfig)
         collections = json.loads(porchpirate.collections(arguments.w))
         try:
-            for collection in collections['data']:
+            for collection in collections.get('data', []):
                 requests = collection['requests']
                 for r in requests:
                     request_data = json.loads(porchpirate.request(r['id']))
@@ -250,7 +250,7 @@ if(arguments.w):
         porchpirate = porchpirate(proxy=proxyconfig)
         collections = json.loads(porchpirate.collections(arguments.w))
         try:
-            for collection in collections['data']:
+            for collection in collections.get('data', []):
                 requests = collection['requests']
                 for r in requests:
                     request_data = json.loads(porchpirate.request(r['id']))
@@ -277,7 +277,7 @@ if(arguments.w):
         porchpirate = porchpirate(proxy=proxyconfig)
         collections = json.loads(porchpirate.collections(arguments.w))
         try:
-            for collection in collections['data']:
+            for collection in collections.get('data', []):
                 requests = collection['requests']
                 try:
                     for request in requests:
