@@ -137,7 +137,7 @@ class porchpirate():
         print(f"{BOLD} - Last updated: {END}{CYAN}{collection_updated_at}{END}{END}")
 
     def _show_formatted_collections(self, workspace_collections):
-        for collection in workspace_collections['data']:
+        for collection in workspace_collections.get('data', []):
             collection_id = collection['id']
             collection_name = collection['name']
             collection_requests = collection['requests']
@@ -199,7 +199,7 @@ class porchpirate():
         print(f"{BOLD}- Friendly: {END}{CYAN}{profile['info']['friendly']}{END}")
         print(f"{BOLD}- User ID: {END}{YELLOW}{profile['entity_id']}{END}\n")
         print(f"{BOLD}Collections:{END}")
-        for entity in collections['data']['collections']:
+        for entity in collections.get('data', {}).get('collections', []):
             entity_id = entity['entityId']
             entity_name = entity['name']
             print(f" - {YELLOW}{entity_id}{END}{END} ({entity_name}{END})")
@@ -219,7 +219,7 @@ class porchpirate():
         print(f"{BOLD}- Friendly: {END}{CYAN}{profile['info']['friendly']}{END}")
         print(f"{BOLD}- Team ID: {END}{YELLOW}{profile['entity_id']}{END}\n")
         print(f"{BOLD}Collections:{END}")
-        for entity in collections['data']['collections']:
+        for entity in collections.get('data', {}).get('collections', []):
             entity_id = entity['entityId']
             entity_name = entity['name']
             print(f" - {YELLOW}{entity_id}{END}{END} ({entity_name}{END})")
@@ -235,7 +235,7 @@ class porchpirate():
             print(f" - {YELLOW}{user_name}{END}{END} ({user_id}{END})")
 
     def search(self, term, page=None, indice=None, limit=100):
-        if limit is not 100:
+        if limit != 100:
             limit = int(limit)
         if page is not None:
             page = int(page)*limit
